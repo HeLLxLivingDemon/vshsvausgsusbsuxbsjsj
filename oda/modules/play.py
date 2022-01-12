@@ -251,8 +251,8 @@ async def play(_, message: Message):
 
     try:
         user = await USER.get_me()
-       except:
-             user.first_name = ASSNAME
+    except:
+        user.first_name = ASSNAME
     usar = user
     wew = usar.id
     try:
