@@ -18,7 +18,7 @@ from typing import Callable
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import InputStream
 from pytgcalls.types.input_stream import InputAudioStream
-
+from oda.utils.decorators import authorized_users_only
 from youtube_search import YoutubeSearch
 
 from pyrogram import Client, filters
