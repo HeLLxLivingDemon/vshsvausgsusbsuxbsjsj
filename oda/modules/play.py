@@ -440,7 +440,7 @@ async def play(_, message: Message):
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
         loop = asyncio.get_event_loop()
-        x = await loop.run_in_executor(None, youtube.download, url, my_hook)
+        x = await loop.run_in_executor(None, youtube.download, url)
         file_path = await oda.tgcalls.convert(x)
 
     if await is_active_chat(message.chat.id):
