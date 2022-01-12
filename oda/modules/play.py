@@ -587,9 +587,7 @@ async def play(_, message: Message):
         await calls.pytgcalls.join_group_call(
             message.chat.id,
             InputStream(
-                InputAudioStream(
-                    file_path,
-                ),
+                InputAudioStream
             ),
             stream_type=StreamType().local_stream,
         )
