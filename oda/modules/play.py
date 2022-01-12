@@ -383,13 +383,76 @@ async def play(_, message: Message):
             return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
+        def my_hook(d):
+            if d["status"] == "downloading":
+                percentage = d["_percent_str"]
+                per = (str(percentage)).replace(".", "", 1).replace("%", "", 1)
+                per = int(per)
+                eta = d["eta"]
+                speed = d["_speed_str"]
+                size = d["_total_bytes_str"]
+                bytesx = d["total_bytes"]
+                if str(bytesx) in flex:
+                    pass
+                else:
+                    flex[str(bytesx)] = 1
+                if flex[str(bytesx)] == 1:
+                    flex[str(bytesx)] += 1
+                    try:
+                        if eta > 2:
+                            lel.edit(
+                                f"Downloading {title[:50]}\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
+                            )
+                    except Exception as e:
+                        pass
+                if per > 250:
+                    if flex[str(bytesx)] == 2:
+                        flex[str(bytesx)] += 1
+                        if eta > 2:
+                            lel.edit(
+                                f"**Downloading** {title[:50]}..\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
+                            )
+                        print(
+                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                        )
+                if per > 500:
+                    if flex[str(bytesx)] == 3:
+                        flex[str(bytesx)] += 1
+                        if eta > 2:
+                            lel.edit(
+                                f"**Downloading** {title[:50]}...\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
+                            )
+                        print(
+                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                        )
+                if per > 800:
+                    if flex[str(bytesx)] == 4:
+                        flex[str(bytesx)] += 1
+                        if eta > 2:
+                            lel.edit(
+                                f"**Downloading** {title[:50]}....\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
+                            )
+                        print(
+                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                        )
+            if d["status"] == "finished":
+                try:
+                    taken = d["_elapsed_str"]
+                except Exception as e:
+                    taken = "00:00"
+                size = d["_total_bytes_str"]
+                lel.edit(
+                    f"**Downloaded** {title[:50]}.....\n\n**FileSize:** {size}\n**Time Taken:** {taken} sec\n\n**Converting File**[__FFmpeg processing__]"
+                )
+                print(f"[{url_suffix}] Downloaded| Elapsed: {taken} seconds")
+
         loop = asyncio.get_event_loop()
         x = await loop.run_in_executor(None, youtube.download, url, my_hook)
         file_path = await oda.tgcalls.convert(x)
     else:
         if len(message.command) < 2:
             return await lel.edit(
-                "🧐 **Song not found! Try searching with the correct title\nExample » /play In The End\n\nChannel : @UserLazyXBot**"
+                "**Song not found! Try different keywords**"
             )
         await lel.edit("🔎 **Finding the song...**")
         query = message.text.split(None, 1)[1]
@@ -439,8 +502,72 @@ async def play(_, message: Message):
             return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
+
+        def my_hook(d):
+            if d["status"] == "downloading":
+                percentage = d["_percent_str"]
+                per = (str(percentage)).replace(".", "", 1).replace("%", "", 1)
+                per = int(per)
+                eta = d["eta"]
+                speed = d["_speed_str"]
+                size = d["_total_bytes_str"]
+                bytesx = d["total_bytes"]
+                if str(bytesx) in flex:
+                    pass
+                else:
+                    flex[str(bytesx)] = 1
+                if flex[str(bytesx)] == 1:
+                    flex[str(bytesx)] += 1
+                    try:
+                        if eta > 2:
+                            lel.edit(
+                                f"Downloading {title[:50]}\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
+                            )
+                    except Exception as e:
+                        pass
+                if per > 250:
+                    if flex[str(bytesx)] == 2:
+                        flex[str(bytesx)] += 1
+                        if eta > 2:
+                            lel.edit(
+                                f"**Downloading** {title[:50]}..\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
+                            )
+                        print(
+                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                        )
+                if per > 500:
+                    if flex[str(bytesx)] == 3:
+                        flex[str(bytesx)] += 1
+                        if eta > 2:
+                            lel.edit(
+                                f"**Downloading** {title[:50]}...\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
+                            )
+                        print(
+                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                        )
+                if per > 800:
+                    if flex[str(bytesx)] == 4:
+                        flex[str(bytesx)] += 1
+                        if eta > 2:
+                            lel.edit(
+                                f"**Downloading** {title[:50]}....\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
+                            )
+                        print(
+                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                        )
+            if d["status"] == "finished":
+                try:
+                    taken = d["_elapsed_str"]
+                except Exception as e:
+                    taken = "00:00"
+                size = d["_total_bytes_str"]
+                lel.edit(
+                    f"**Downloaded** {title[:50]}.....\n\n**FileSize:** {size}\n**Time Taken:** {taken} sec\n\n**Converting File**[__FFmpeg processing__]"
+                )
+                print(f"[{url_suffix}] Downloaded| Elapsed: {taken} seconds")
+
         loop = asyncio.get_event_loop()
-        x = await loop.run_in_executor(None, youtube.download, url)
+        x = await loop.run_in_executor(None, youtube.download, url, my_hook)
         file_path = await oda.tgcalls.convert(x)
 
     if await is_active_chat(message.chat.id):
