@@ -8,13 +8,14 @@ import subprocess
 import requests
 import aiohttp
 import yt_dlp
-
+import converter
 from os import path
 from typing import Union
+from typing import callable 
 from asyncio import QueueEmpty
 from PIL import Image, ImageFont, ImageDraw
 from typing import Callable
-
+from cache.admins import admins as a
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import InputStream
 from pytgcalls.types.input_stream import InputAudioStream
