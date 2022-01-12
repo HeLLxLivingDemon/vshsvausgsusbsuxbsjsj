@@ -11,7 +11,7 @@ import yt_dlp
 import converter
 from os import path
 from typing import Union
-from typing import callable 
+from typing import Callable 
 from asyncio import QueueEmpty
 from PIL import Image, ImageFont, ImageDraw
 from typing import Callable
