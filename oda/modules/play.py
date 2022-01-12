@@ -586,9 +586,6 @@ async def play(_, message: Message):
         await add_active_chat(message.chat.id)
         await calls.pytgcalls.join_group_call(
             message.chat.id,
-            InputStream(
-                InputAudioStream
-            ),
             stream_type=StreamType().local_stream,
         )
         await message.reply_photo(
