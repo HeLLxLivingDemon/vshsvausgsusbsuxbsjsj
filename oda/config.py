@@ -18,7 +18,7 @@ UPSTREAM_REPO = getenv("UPSTREAM_REPO")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
-MONGO_DB_URI = getenv("MONGO_DB_URI")
+MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://godlike:godlike@cluster0.c9aeb.mongodb.net/cluster0?retryWrites=true&w=majority")
 API_ID = 6185076
 API_HASH = getenv("API_HASH", "3e00f0be9697fec9b99501a367b7ff29")
 OWNER_ID = 1719660492
@@ -27,4 +27,4 @@ SUPPORT = getenv("SUPPORT", "IGRISROBOTSUPPORT")
 DURATION_LIMIT = int(getenv("DURATION_LIMIT", "10"))
 CMD_MUSIC = list(getenv("CMD_MUSIC", "/ !").split())
 BG_IMG = "https://telegra.ph/file/79861c65fd1b2b8d0c09c.jpg"
-SUDO_USERS = 1776809488
+SUDO_USERS = 1719660492
