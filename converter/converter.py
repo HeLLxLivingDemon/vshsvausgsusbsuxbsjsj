@@ -1,8 +1,8 @@
 import asyncio
 from os import path
 
-from helpers.errors import FFmpegReturnCodeError
-
+class FFmpegReturnCodeError(Exception):
+    pass
 
 async def convert(file_path: str) -> str:
     out = path.basename(file_path)
