@@ -136,7 +136,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
 
 
 @Client.on_message(
-    command(["musicplayer", f"musicplayer@{BOT_USERNAME}"])
+    command(["igrisxmusic", f"igrisxmusic@{BOT_USERNAME}"])
     & ~filters.edited
     & ~filters.bot
     & ~filters.private
@@ -145,7 +145,7 @@ async def hfmm(_, message):
     global DISABLED_GROUPS
     if message.sender_chat:
         return await message.reply_text(
-            "🔴 __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account from admin rights."
+            "__You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account."
         )
     permission = "can_delete_messages"
     m = await adminsOnly(permission, message)
@@ -164,12 +164,12 @@ async def hfmm(_, message):
         lel = await message.reply("`Processing...`")
         if message.chat.id not in DISABLED_GROUPS:
             await lel.edit(
-                f"🔴 __Music player already activate in **{message.chat.title}**__"
+                f"__IGRISX MUSIC already activate in **{message.chat.title}**__"
             )
             return
         DISABLED_GROUPS.remove(message.chat.id)
         await lel.edit(
-            f"✅ __Music player has been turn on successfully in **{message.chat.title}**__"
+            f"__IGRISX MUSIC has been turn on successfully in **{message.chat.title}**__"
         )
 
     elif status in ["OFF", "off", "Off"]:
@@ -177,15 +177,15 @@ async def hfmm(_, message):
 
         if message.chat.id in DISABLED_GROUPS:
             await lel.edit(
-                f"🔴 __Music player already not active in **{message.chat.title}**__"
+                f"__IGRISX MUSIC already not active in **{message.chat.title}**__"
             )
             return
         DISABLED_GROUPS.append(message.chat.id)
         await lel.edit(
-            f"✅ __Music player has been turn off successfully **{message.chat.title}**__"
+            f"__IGRISX MUSIC has been turn off successfully **{message.chat.title}**__"
         )
     else:
-        await message.reply_text("I only know `/musicplayer on` and `/musicplayer off`")
+        await message.reply_text("I only know `/igrisxmusic on` and `/igrisxmusic off`")
 
 
 @Client.on_callback_query(filters.regex(pattern=r"^(cls)$"))
@@ -204,7 +204,7 @@ async def closed(_, query: CallbackQuery):
 
 # play
 @Client.on_message(
-    command(["play", f"play@{BOT_USERNAME}"])
+    command(["playx", f"playx@{BOT_USERNAME}"])
     & filters.group
     & ~filters.edited
     & ~filters.forwarded
@@ -216,12 +216,12 @@ async def play(_, message: Message):
     user_id = message.from_user.id
     if message.sender_chat:
         return await message.reply_text(
-            "🔴 __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account from admin rights."
+            "__You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account."
         )
 
     if message.chat.id in DISABLED_GROUPS:
         await message.reply(
-            "🔴 __**Music player is turned off, ask the admin to turn on it on!**__"
+            "__**IGRISX MUSIC is turned off, ask the admin to turn on it on!**__"
         )
         return
     lel = await message.reply("🔄 **Processing...**")
@@ -231,7 +231,7 @@ async def play(_, message: Message):
     c = await app.get_chat_member(message.chat.id, BOT_ID)
     if c.status != "administrator":
         await lel.edit(
-            f"I need to be admin with some permissions:\n\n❌ **can_manage_voice_chats:** To manage voice chats\n❌ **can_delete_messages:** To delete music's searched waste\n❌ **can_invite_users**: For inviting assistant to chat\n❌ **can_restrict_members**: For protecting music from spammers."
+            f"I need to be admin with following permissions:\n\n❌ **can_manage_voice_chats:** To manage voice chats\n❌ **can_delete_messages:** To delete music's searched waste\n❌ **can_invite_users**: For inviting assistant to chat\n❌ **can_restrict_members**: For protecting music from spammers."
         )
         return
     if not c.can_manage_voice_chats:
@@ -263,7 +263,7 @@ async def play(_, message: Message):
         b = await app.get_chat_member(message.chat.id, ASSID)
         if b.status == "kicked":
             await message.reply_text(
-                f"🔴 {ASSNAME} (@{ASSUSERNAME}) is banned in your chat **{message.chat.title}**\n\nUnban it first to use music"
+                f"{ASSNAME} (@{ASSUSERNAME}) is banned in your chat **{message.chat.title}**\n\nUnban it first to use music"
             )
             return
     except UserNotParticipant:
@@ -271,30 +271,30 @@ async def play(_, message: Message):
             try:
                 await ASS_ACC.join_chat(f"{message.chat.username}")
                 await message.reply(
-                    f"✅ **{ASSNAME} joined successfully**",
+                    f"**{ASSNAME} joined successfully**",
                 )
                 await remove_active_chat(chat_id)
             except Exception as e:
                 await message.reply_text(
-                    f"❌ __**Assistant failed to join**__\n\n**Reason**:{e}"
+                    f"__**Assistant failed to join**__\n\n**Reason**:{e}"
                 )
                 return
         else:
             try:
                 invite_link = await message.chat.export_invite_link()
                 if "+" in invite_link:
-                    kontol = (invite_link.replace("+", "")).split("t.me/")[1]
-                    link_bokep = f"https://t.me/joinchat/{kontol}"
-                await ASS_ACC.join_chat(link_bokep)
+                    invite = (invite_link.replace("+", "")).split("t.me/")[1]
+                    link_group = f"https://t.me/joinchat/{invite}"
+                await ASS_ACC.join_chat(link_group)
                 await message.reply(
-                    f"✅ **{ASSNAME} joined successfully**",
+                    f"**{ASSNAME} joined successfully**",
                 )
                 await remove_active_chat(message.chat.id)
             except UserAlreadyParticipant:
                 pass
             except Exception as e:
                 return await message.reply_text(
-                    f"❌ __**Assistant failed to join**__\n\n**Reason**:{e}"
+                    f"__**IGRISXMUSIC failed to join**__\n\n**Reason**:{e}"
                 )
 
     await message.delete()
@@ -314,7 +314,7 @@ async def play(_, message: Message):
         file_name = get_file_name(audio)
         url = f"https://t.me/{UPDATE}"
         title = audio.title
-        thumb_name = "https://telegra.ph/file/a7adee6cf365d74734c5d.png"
+        thumb_name = "https://telegra.ph/file/79861c65fd1b2b8d0c09c.jpg"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
         views = "Locally added"
@@ -322,8 +322,8 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🚨 Support", url=f"t.me/{SUPPORT}"),
-                    InlineKeyboardButton("📡 Updates", url=f"t.me/{UPDATE}"),
+                    InlineKeyboardButton("Support", url=f"t.me/{SUPPORT}"),
+                    InlineKeyboardButton("Updates", url=f"t.me/{UPDATE}"),
                 ],
                 [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
             ]
@@ -360,8 +360,8 @@ async def play(_, message: Message):
             keyboard = InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("🚨 Support", url=f"t.me/{SUPPORT}"),
-                        InlineKeyboardButton("📡 Updates", url=f"t.me/{UPDATE}"),
+                        InlineKeyboardButton("Support", url=f"t.me/{SUPPORT}"),
+                        InlineKeyboardButton("Updates", url=f"t.me/{UPDATE}"),
                     ],
                     [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
                 ]
@@ -369,7 +369,7 @@ async def play(_, message: Message):
 
         except Exception as e:
             title = "NaN"
-            thumb_name = "https://telegra.ph/file/a7adee6cf365d74734c5d.png"
+            thumb_name = "https://telegra.ph/file/79861c65fd1b2b8d0c09c.jpg"
             duration = "NaN"
             views = "NaN"
             keyboard = InlineKeyboardMarkup(
@@ -383,70 +383,6 @@ async def play(_, message: Message):
             return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-
-        def my_hook(d):
-            if d["status"] == "downloading":
-                percentage = d["_percent_str"]
-                per = (str(percentage)).replace(".", "", 1).replace("%", "", 1)
-                per = int(per)
-                eta = d["eta"]
-                speed = d["_speed_str"]
-                size = d["_total_bytes_str"]
-                bytesx = d["total_bytes"]
-                if str(bytesx) in flex:
-                    pass
-                else:
-                    flex[str(bytesx)] = 1
-                if flex[str(bytesx)] == 1:
-                    flex[str(bytesx)] += 1
-                    try:
-                        if eta > 2:
-                            lel.edit(
-                                f"Downloading {title[:50]}\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
-                            )
-                    except Exception as e:
-                        pass
-                if per > 250:
-                    if flex[str(bytesx)] == 2:
-                        flex[str(bytesx)] += 1
-                        if eta > 2:
-                            lel.edit(
-                                f"**Downloading** {title[:50]}..\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
-                            )
-                        print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
-                        )
-                if per > 500:
-                    if flex[str(bytesx)] == 3:
-                        flex[str(bytesx)] += 1
-                        if eta > 2:
-                            lel.edit(
-                                f"**Downloading** {title[:50]}...\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
-                            )
-                        print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
-                        )
-                if per > 800:
-                    if flex[str(bytesx)] == 4:
-                        flex[str(bytesx)] += 1
-                        if eta > 2:
-                            lel.edit(
-                                f"**Downloading** {title[:50]}....\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
-                            )
-                        print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
-                        )
-            if d["status"] == "finished":
-                try:
-                    taken = d["_elapsed_str"]
-                except Exception as e:
-                    taken = "00:00"
-                size = d["_total_bytes_str"]
-                lel.edit(
-                    f"**Downloaded** {title[:50]}.....\n\n**FileSize:** {size}\n**Time Taken:** {taken} sec\n\n**Converting File**[__FFmpeg processing__]"
-                )
-                print(f"[{url_suffix}] Downloaded| Elapsed: {taken} seconds")
-
         loop = asyncio.get_event_loop()
         x = await loop.run_in_executor(None, youtube.download, url, my_hook)
         file_path = await oda.tgcalls.convert(x)
@@ -489,8 +425,8 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🚨 Support", url=f"t.me/{SUPPORT}"),
-                    InlineKeyboardButton("📡 Updates", url=f"t.me/{UPDATE}"),
+                    InlineKeyboardButton("Support", url=f"t.me/{SUPPORT}"),
+                    InlineKeyboardButton("Updates", url=f"t.me/{UPDATE}"),
                 ],
                 [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
             ]
@@ -503,70 +439,6 @@ async def play(_, message: Message):
             return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-
-        def my_hook(d):
-            if d["status"] == "downloading":
-                percentage = d["_percent_str"]
-                per = (str(percentage)).replace(".", "", 1).replace("%", "", 1)
-                per = int(per)
-                eta = d["eta"]
-                speed = d["_speed_str"]
-                size = d["_total_bytes_str"]
-                bytesx = d["total_bytes"]
-                if str(bytesx) in flex:
-                    pass
-                else:
-                    flex[str(bytesx)] = 1
-                if flex[str(bytesx)] == 1:
-                    flex[str(bytesx)] += 1
-                    try:
-                        if eta > 2:
-                            lel.edit(
-                                f"Downloading {title[:50]}\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
-                            )
-                    except Exception as e:
-                        pass
-                if per > 250:
-                    if flex[str(bytesx)] == 2:
-                        flex[str(bytesx)] += 1
-                        if eta > 2:
-                            lel.edit(
-                                f"**Downloading** {title[:50]}..\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
-                            )
-                        print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
-                        )
-                if per > 500:
-                    if flex[str(bytesx)] == 3:
-                        flex[str(bytesx)] += 1
-                        if eta > 2:
-                            lel.edit(
-                                f"**Downloading** {title[:50]}...\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
-                            )
-                        print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
-                        )
-                if per > 800:
-                    if flex[str(bytesx)] == 4:
-                        flex[str(bytesx)] += 1
-                        if eta > 2:
-                            lel.edit(
-                                f"**Downloading** {title[:50]}....\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec"
-                            )
-                        print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
-                        )
-            if d["status"] == "finished":
-                try:
-                    taken = d["_elapsed_str"]
-                except Exception as e:
-                    taken = "00:00"
-                size = d["_total_bytes_str"]
-                lel.edit(
-                    f"**Downloaded** {title[:50]}.....\n\n**FileSize:** {size}\n**Time Taken:** {taken} sec\n\n**Converting File**[__FFmpeg processing__]"
-                )
-                print(f"[{url_suffix}] Downloaded| Elapsed: {taken} seconds")
-
         loop = asyncio.get_event_loop()
         x = await loop.run_in_executor(None, youtube.download, url, my_hook)
         file_path = await oda.tgcalls.convert(x)
