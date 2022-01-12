@@ -59,7 +59,7 @@ from oda.config import (
 )
 from oda.utils.filters import command
 from oda.utils.decorators import errors, sudo_users_only
-from oda.utils.administrator import adminsOnly
+from oda.utils.administrator import adminsOnly as authorized_users_only
 from oda.utils.errors import DurationLimitError
 from oda.utils.gets import get_url, get_file_name
 from oda.modules.admins import member_permissions
