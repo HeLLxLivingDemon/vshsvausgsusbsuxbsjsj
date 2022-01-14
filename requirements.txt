@@ -15,6 +15,7 @@ youtube-search
 speedtest-cli
 motor
 psutil
+curl -sL https://deb.nodesource.com/setup_16.x | bash -
 requests
 rich
 dnspython
