@@ -6,7 +6,7 @@ pillow
 pyrogram
 hachoir
 lyricsgenius
-py-tgcalls==0.5.5
+py-tgcalls
 wget
 python-dotenv
 search_engine_parser
