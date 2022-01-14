@@ -207,7 +207,7 @@ async def closed(_, query: CallbackQuery):
     command(["playx", f"playx@{BOT_USERNAME}"])
     & filters.group
     & ~filters.edited
-    & filters.regex(play_upvote, re.IGNORECASE)
+    & filters.regex(play_regex, re.IGNORECASE)
     & ~filters.forwarded
     & ~filters.via_bot
 )
