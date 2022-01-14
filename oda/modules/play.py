@@ -63,7 +63,7 @@ from oda.utils.administrator import adminsOnly
 from oda.utils.errors import DurationLimitError
 from oda.utils.gets import get_url, get_file_name
 from oda.modules.admins import member_permissions
-
+play_regex = r"((?i)\+play|Igrisx play|IGRISX play|IGRISX PLAY)"
 
 # plus
 chat_id = None
@@ -207,6 +207,7 @@ async def closed(_, query: CallbackQuery):
     command(["playx", f"playx@{BOT_USERNAME}"])
     & filters.group
     & ~filters.edited
+    & filters.regex(play_upvote)
     & ~filters.forwarded
     & ~filters.via_bot
 )
