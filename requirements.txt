@@ -9,6 +9,7 @@ lyricsgenius
 py-tgcalls
 wget
 python-dotenv
+search_engine_parser
 youtube-search-python
 youtube-search
 speedtest-cli
