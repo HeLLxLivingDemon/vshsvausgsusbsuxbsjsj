@@ -75,7 +75,7 @@ async def pause(_, message: Message):
     await music_off(chat_id)
     await calls.pytgcalls.pause_stream(chat_id)
     await message.reply_text(
-        f"__**Voicechat Paused**__\n│\n╰ Music paused by {checking}!"
+        f"__**Voicechat Paused**__\n • Music paused by {checking}!"
     )
 
 
@@ -83,7 +83,7 @@ async def pause(_, message: Message):
 async def resume(_, message: Message):
     if message.sender_chat:
         return await message.reply_text(
-            " __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account."
+            " __You're an **Anonymous Admin**!__\n • Revert back to user account."
         )
     permission = "can_delete_messages"
     m = await adminsOnly(permission, message)
@@ -103,7 +103,7 @@ async def resume(_, message: Message):
         await music_on(chat_id)
         await calls.pytgcalls.resume_stream(chat_id)
         await message.reply_text(
-            f"__**Voicechat Resumed**__\n│\n╰ Music resumed by {checking}!"
+            f"__**Voicechat Resumed**__\n • Music resumed by {checking}!"
         )
 
 
@@ -127,7 +127,7 @@ async def stop(_, message: Message):
         await remove_active_chat(chat_id)
         await calls.pytgcalls.leave_group_call(chat_id)
         await message.reply_text(
-            f" __**Voicechat End/Stopped**__\n│\n╰ Music ended by {checking}!"
+            f" __**Voicechat End/Stopped**__\n • Music ended by {checking}!"
         )
     else:
         return await message.reply_text(
@@ -177,7 +177,7 @@ async def skip(_, message: Message):
 async def stop_cmd(_, message):
     if message.sender_chat:
         return await message.reply_text(
-            " __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account."
+            " __You're an **Anonymous Admin**!__\n • Revert back to user account."
         )
     permission = "can_delete_messages"
     m = await adminsOnly(permission, message)
