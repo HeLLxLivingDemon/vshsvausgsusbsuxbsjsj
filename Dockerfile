@@ -5,4 +5,4 @@ COPY . /app/
 WORKDIR /app/
 RUN pip3 install -U pip
 RUN pip3 install -U -r requirements.txt
-CMD bash start
+CMD bash python3 -m oda
