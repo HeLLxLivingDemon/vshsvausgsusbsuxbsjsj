@@ -1,1 +1,1 @@
-worker: python3 -m oda
+worker: bash start 
